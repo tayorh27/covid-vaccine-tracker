@@ -128,9 +128,11 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     // console.log(this.findColorByCountry("Nigeria"))
     this.http.get("https://api.mediahack.co.za/vaccines/owid.php").subscribe(res => {
-
+      // console.log(res)
+      const arr:any = res
+      console.log(arr)
       if (res) {
-        res.forEach((element: any) => {
+        arr.forEach((element: any) => {
           // console.log(element.location)
           const vac: Vaccines = {
             date: element.date,
