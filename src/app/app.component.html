@@ -113,7 +113,7 @@
 
     <!-- this div holds the top area on the image -->
     <div class="map_lcatn">
-      <h1>Africa</h1>
+      <h1>Nigeria</h1>
     </div>
     <!-- this div ends here -->
 
@@ -126,15 +126,13 @@
             [layers]='layers' [titleSettings]="titleSettings" (bubbleRendering)="bubbleRendering($event)"
             (load)="load($event)" format='n' useGroupingSeparator="true">
           </ejs-maps>
-          <!-- <ejs-maps *ngIf="loaded" id='maps' #maps style="display:block;" [zoomSettings]='zoomSettings' [layers]='layers' (load)="load($event)">
-          </ejs-maps> -->
         </div>
-        <div style="float: right; margin-right: 10px;">Last Update: {{last_update}}
+        <!-- <div style="float: right; margin-right: 10px;">Last Update: {{last_update}}
         </div>
         <div style="float: right; margin-right: 10px;">Source:
           <a href="https://africadatahub.org"
             target="_blank">Africa Data Hub</a>
-        </div>
+        </div> -->
       </div>
 
       <div class="control-section">

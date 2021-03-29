@@ -3,7 +3,7 @@ import * as $ from 'jquery'
 import { MapsTheme, Maps, Bubble, IBubbleRenderingEventArgs, MapsTooltip, ILoadEventArgs, DataLabel, } from '@syncfusion/ej2-angular-maps';
 import { MapAjax } from '@syncfusion/ej2-angular-maps';
 Maps.Inject(Bubble, MapsTooltip, DataLabel);
-import { africaMap, worldMap } from "./world-map";
+import { africaMap, nigeriaMap, worldMap } from "./world-map";
 import { DummyData } from './population-data';
 import { HttpClient } from '@angular/common/http';
 import { ILoadedEventArgs, ChartTheme } from '@syncfusion/ej2-angular-charts';
@@ -35,6 +35,7 @@ export class AppComponent implements OnInit {
 
 
   vaccines: Vaccines[] = []
+  vaccinesNig: Vaccines[] = []
   loaded = false
 
   @ViewChild('maps') public maps: Maps;
@@ -53,7 +54,7 @@ export class AppComponent implements OnInit {
   }
 
   public titleSettings: object = {
-    text: 'Covid-19 Vaccainations in Africa',
+    text: 'Covid-19 Vaccinations in Nigeria',
     titleStyle: {
       size: '16px'
     }
@@ -63,7 +64,7 @@ export class AppComponent implements OnInit {
     {
       shapeDataPath: 'name',
       shapePropertyPath: 'name',
-      shapeData: africaMap,
+      shapeData: nigeriaMap,
       shapeSettings: {
         // fill: '#E5E5E5'
         autofill: true
@@ -81,11 +82,11 @@ export class AppComponent implements OnInit {
           minRadius: 3,
           maxRadius: 70,
           opacity: 0.8,
-          dataSource: this.vaccines,//new DummyData().internetUsers,
+          dataSource: this.vaccinesNig,//new DummyData().internetUsers,<div> <span class="listing1">Date : </span><span class="listing2">${date}</span> </div> 
           tooltipSettings: {
             visible: true,
             valuePath: 'total_vaccination',
-            template: '<div id="template"> <div class="toolback"> <div class="listing2"> <center> ${name} </center> </div> <hr style="margin-top: 2px;margin-bottom:5px;border:0.5px solid #DDDDDD"> <div> <span class="listing1">Date : </span><span class="listing2">${date}</span> </div> <div> <span class="listing1">Total Vaccination : </span><span class="listing2">${total_vaccination}</span> </div> </div> </div>'
+            template: '<div id="template"> <div class="toolback"> <div class="listing2"> <center> ${name} </center> </div> <hr style="margin-top: 2px;margin-bottom:5px;border:0.5px solid #DDDDDD"> <div> <span class="listing1">Total Vaccination : </span><span class="listing2">${total_vaccination}</span> </div> </div> </div>'
           },
         }
       ]
@@ -126,10 +127,22 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.data.forEach(dt => {
+      const vac: Vaccines = {
+        date: "",
+        color: "#333333",// this.generateColor(),
+        name: dt.x,
+        total_vaccination: this.formatNumbers(dt.y),
+        value: this.bubblesize(dt.y)
+      }
+      this.vaccinesNig.push(vac)
+    })
+    this.loaded = true
     // console.log(this.findColorByCountry("Nigeria"))
+    // this.writeNigeriaAlgorithm()
     this.http.get("https://api.mediahack.co.za/vaccines/owid.php").subscribe(res => {
       // console.log(res)
-      const arr:any = res
+      const arr: any = res
       console.log(arr)
       if (res) {
         arr.forEach((element: any) => {
@@ -233,7 +246,7 @@ export class AppComponent implements OnInit {
   };
   //Initializing Chart Width
   public width: string = "100%"//Browser.isDevice ? '100%' : '60%';
-  public data: Object[] = [
+  public data: any[] = [//Object
     { x: 'Abia', y: 0 }, { x: 'Adamawa', y: 4150 },
     { x: 'Akwa Ibom', y: 55 }, { x: 'Anambra', y: 10 },
     { x: 'Bauchi', y: 14422 }, { x: 'Bayelsa', y: 358 },
@@ -293,6 +306,86 @@ export class AppComponent implements OnInit {
   };
   // custom code end
   barTitle: string = 'Covid-19 Vaccinations in Nigeria';
+
+  featuresData: any[] = []
+
+  writeNigeriaAlgorithm() {
+
+    const nigeria = new DummyData().nigeria_data
+
+    nigeria.forEach(nig => {
+
+      const coords = []
+
+      const list_single_state = nigeria.filter((val, ind, arr) => {
+        return val.admin_name === nig.admin_name
+      })
+
+      list_single_state.forEach(state => {
+        coords.push([Number(state.lat), Number(state.lng)])
+      })
+
+      const exist = this.checkIfExists(nig.admin_name)
+      if (!exist) {
+        this.featuresData.push({
+          "type": "Feature",
+          "properties": {
+            "admin": "Nigeria",
+            "name": nig.admin_name,
+            "iso_3166_2": "NG"//`${nig.admin_name}`.substring(0, 2).toUpperCase()
+          },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [coords]
+          }
+        })
+      } else {
+        const index = this.findIndex(nig.admin_name)
+        this.featuresData.splice(index, 1)
+        this.featuresData.push({
+          "type": "Feature",
+          "properties": {
+            "admin": "Nigeria",
+            "name": nig.admin_name,
+            "iso_3166_2": "NG"//`${nig.admin_name}`.substring(0, 1).toUpperCase()
+          },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [coords]
+          }
+        })
+      }
+
+    })
+
+    console.log(this.featuresData.length)
+
+    const final = {
+      "type": "FeatureCollection",
+      "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+      "features": this.featuresData
+    }
+
+    console.log(JSON.stringify(final))
+  }
+
+  findIndex(state: any) {
+    return this.featuresData.findIndex((val, ind, arr) => {
+      return val.properties.name === state
+    })
+  }
+
+  checkIfExists(state: any) {
+    if (this.featuresData.length === 0) {
+      return false
+    }
+
+    const getData = this.featuresData.find((val, ind, arr) => {
+      return val.properties.name === state
+    })
+
+    return getData !== undefined
+  }
 
 }
 

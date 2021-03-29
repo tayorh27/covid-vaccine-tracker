@@ -52,14 +52,14 @@ header h2{
 
 body {
     height: 100vh;
-    overflow: hidden;
+    /* overflow: hidden; */
     font-family: 'Montserrat', sans-serif;
     /* background: #f8f8f5; */
 }
 @media screen and (max-width: 380px) {
     body {
         height: 100vh;
-        overflow: hidden;
+        /* overflow: hidden; */
         font-family: 'Montserrat', sans-serif;
         /* background: #f8f8f5; */
     }   
@@ -263,7 +263,7 @@ p {
     outline: none;
     border-right: none;
     margin-left: 5px;
-    background:#efefef 
+    background:#efefef;
 }
 @media screen and (max-width: 380px) {
     .sidebar input{
