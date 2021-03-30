@@ -1,8 +1,7 @@
 import { Component, Inject, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import * as $ from 'jquery'
-import { MapsTheme, Maps, Bubble, IBubbleRenderingEventArgs, MapsTooltip, ILoadEventArgs, DataLabel, } from '@syncfusion/ej2-angular-maps';
-import { MapAjax } from '@syncfusion/ej2-angular-maps';
-Maps.Inject(Bubble, MapsTooltip, DataLabel);
+import { MapsTheme, Legend, Maps, Bubble, Zoom, IBubbleRenderingEventArgs, MapsTooltip, ILoadEventArgs, DataLabel, } from '@syncfusion/ej2-angular-maps';
+Maps.Inject(Legend, Bubble, MapsTooltip, DataLabel, Zoom);
 import { africaMap, nigeriaMap, worldMap } from "./world-map";
 import { DummyData } from './population-data';
 import { HttpClient } from '@angular/common/http';
@@ -16,6 +15,7 @@ export interface Vaccines {
   color: string//color
   total_vaccination: string
   date: string
+  value_string: string
 }
 declare var require: any;
 
@@ -48,9 +48,24 @@ export class AppComponent implements OnInit {
   // custom code end
   public zoomSettings: object = {
     enable: true,
+    toolbars: ['Zoom', 'ZoomIn', 'ZoomOut', 'Pan', 'Reset'],
     horizontalAlignment: 'Near',
     toolBarOrientation: 'Vertical',
     pinchZooming: true
+  }
+
+  public legendSettings: object = {
+    visible: true,
+    position: 'Bottom',
+    height: '10',
+    width: '80%',
+    mode: 'Interactive',
+    titleStyle: {
+      size: '18px'
+    },
+    title: {
+      text: 'Category'
+    },
   }
 
   public titleSettings: object = {
@@ -62,34 +77,58 @@ export class AppComponent implements OnInit {
 
   public layers: object[] = [
     {
+      dataSource: this.vaccinesNig,
       shapeDataPath: 'name',
       shapePropertyPath: 'name',
       shapeData: nigeriaMap,
       shapeSettings: {
-        // fill: '#E5E5E5'
-        autofill: true
+        colorValuePath: 'value',
+        fill: '#167086',
+        border: {
+          color: 'white',
+          width: 1.5
+        },
+        // autofill: true
+        colorMapping: [
+          {
+            from: 0, to: 1000, color: '#DEEBAE', label: 'Low'
+          },
+          {
+            from: 1001, to: 20000, color: '#A4D6AD', label: 'Moderate'
+          },
+          {
+            from: 20001, to: 40000, color: '#37AFAB', label: 'High'
+          },
+        ],
       },
       dataLabelSettings: {
         visible: true,
         labelPath: 'name',
+        // template: '<div id="marker1" style="color:white; font-size:10px;">${name}</div>',
         smartLabelMode: 'Hide',
+        fill: '#ffffff'
       },
-      bubbleSettings: [
-        {
-          visible: true,
-          valuePath: 'value',
-          colorValuePath: 'color',
-          minRadius: 3,
-          maxRadius: 70,
-          opacity: 0.8,
-          dataSource: this.vaccinesNig,//new DummyData().internetUsers,<div> <span class="listing1">Date : </span><span class="listing2">${date}</span> </div> 
-          tooltipSettings: {
-            visible: true,
-            valuePath: 'total_vaccination',
-            template: '<div id="template"> <div class="toolback"> <div class="listing2"> <center> ${name} </center> </div> <hr style="margin-top: 2px;margin-bottom:5px;border:0.5px solid #DDDDDD"> <div> <span class="listing1">Total Vaccination : </span><span class="listing2">${total_vaccination}</span> </div> </div> </div>'
-          },
-        }
-      ]
+      tooltipSettings: {
+        visible: true,
+        valuePath: 'total_vaccination',
+        template: '<div id="template"> <div class="toolback"> <div class="listing2"> <center> ${name} </center> </div> <hr style="margin-top: 2px;margin-bottom:5px;border:0.5px solid #DDDDDD"> <div> <span class="listing1">Total Vaccination : </span><span class="listing2">${total_vaccination}</span> </div> </div> </div>'
+      },
+      // bubbleSettings: [
+      //   {
+      //     visible: true,
+      //     valuePath: 'value',
+      //     colorValuePath: 'color',
+      //     minRadius: 3,
+      //     maxRadius: 70,
+      //     opacity: 0.8,
+      //     dataSource: this.vaccinesNig,//new DummyData().internetUsers,<div> <span class="listing1">Date : </span><span class="listing2">${date}</span> </div> 
+      //     tooltipSettings: {
+      //       visible: true,
+      //       valuePath: 'total_vaccination',
+      //       template: '<div id="template"> <div class="toolback"> <div class="listing2"> <center> ${name} </center> </div> <hr style="margin-top: 2px;margin-bottom:5px;border:0.5px solid #DDDDDD"> <div> <span class="listing1">Total Vaccination : </span><span class="listing2">${total_vaccination}</span> </div> </div> </div>'
+      //     },
+      //   }
+      // ]
     }
   ]
 
@@ -133,37 +172,40 @@ export class AppComponent implements OnInit {
         color: "#333333",// this.generateColor(),
         name: dt.x,
         total_vaccination: this.formatNumbers(dt.y),
-        value: this.bubblesize(dt.y)
+        value: dt.y,//this.bubblesize(dt.y),
+        value_string: (dt.y < 5000) ? "Low" : (dt.y > 5001 && dt.y < 20000) ? "Moderate" : "High"
       }
       this.vaccinesNig.push(vac)
     })
     this.loaded = true
+    console.log(this.vaccinesNig)
     // console.log(this.findColorByCountry("Nigeria"))
     // this.writeNigeriaAlgorithm()
-    this.http.get("https://api.mediahack.co.za/vaccines/owid.php").subscribe(res => {
-      // console.log(res)
-      const arr: any = res
-      console.log(arr)
-      if (res) {
-        arr.forEach((element: any) => {
-          // console.log(element.location)
-          const vac: Vaccines = {
-            date: element.date,
-            color: "#333333",// this.generateColor(),
-            name: element.location,
-            total_vaccination: element.total_vaccinations,
-            value: this.bubblesize(element.total_vaccinations)
-          }
-          this.vaccines.push(vac)
-        });
-        this.last_update = this.getDataByLocation("africa").date ?? ""
-        this.worldwide_vaccine = this.formatNumbers(Number(this.getDataByLocation("world").total_vaccination)) ?? "0"
-        this.africa_vaccine = this.formatNumbers(Number(this.getDataByLocation("africa").total_vaccination)) ?? "0"
-        this.nigeria_vaccine = this.formatNumbers(Number(this.getDataByLocation("nigeria").total_vaccination)) ?? "0"
-        this.loaded = true
-        // console.log(this.vaccines)
-      }
-    })
+    // this.http.get("https://api.mediahack.co.za/vaccines/owid.php").subscribe(res => {
+    //   // console.log(res)
+    //   const arr: any = res
+    //   console.log(arr)
+    //   if (res) {
+    //     arr.forEach((element: any) => {
+    //       // console.log(element.location)
+    //       const vac: Vaccines = {
+    //         date: element.date,
+    //         color: "#333333",// this.generateColor(),
+    //         name: element.location,
+    //         total_vaccination: element.total_vaccinations,
+    //         value: this.bubblesize(element.total_vaccinations),
+    //         value_string: ""
+    //       }
+    //       this.vaccines.push(vac)
+    //     });
+    //     this.last_update = this.getDataByLocation("africa").date ?? ""
+    //     this.worldwide_vaccine = this.formatNumbers(Number(this.getDataByLocation("world").total_vaccination)) ?? "0"
+    //     this.africa_vaccine = this.formatNumbers(Number(this.getDataByLocation("africa").total_vaccination)) ?? "0"
+    //     this.nigeria_vaccine = this.formatNumbers(Number(this.getDataByLocation("nigeria").total_vaccination)) ?? "0"
+    //     this.loaded = true
+    //     // console.log(this.vaccines)
+    //   }
+    // })
 
   }
 
@@ -254,7 +296,7 @@ export class AppComponent implements OnInit {
     { x: 'Cross River', y: 366 }, { x: 'Delta', y: 214 },
     { x: 'Ebonyi', y: 8 }, { x: 'Edo', y: 1267 },
     { x: 'Ekiti', y: 67 }, { x: 'Enugu', y: 277 },
-    { x: 'FCT', y: 5232 }, { x: 'Gombe', y: 158 },
+    { x: 'Federal Capital Territory', y: 5232 }, { x: 'Gombe', y: 158 },
     { x: 'Imo', y: 706 }, { x: 'Jigawa', y: 19226 },
     { x: 'Kaduna', y: 7099 }, { x: 'Kano', y: 1495 },
     { x: 'Katsina', y: 3401 }, { x: 'Kebbi', y: 0 },

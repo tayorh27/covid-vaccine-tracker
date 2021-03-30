@@ -37,14 +37,14 @@ header img{
 }
 
 header h2{
-    color: grey;
+    /* color: grey; */
     margin-right: 40px;
     
 }
 
 @media screen and (max-width: 380px) {
     header h2{
-        color: grey;
+        /* color: grey; */
         margin-left: 8px;
         font-size: 17px;
     }   
@@ -54,14 +54,14 @@ body {
     height: 100vh;
     /* overflow: hidden; */
     font-family: 'Montserrat', sans-serif;
-    /* background: #f8f8f5; */
+    background: rgb(8, 8, 92);
 }
 @media screen and (max-width: 380px) {
     body {
         height: 100vh;
         /* overflow: hidden; */
         font-family: 'Montserrat', sans-serif;
-        /* background: #f8f8f5; */
+        background: rgb(8, 8, 92);
     }   
 }
 
@@ -85,7 +85,7 @@ p {
 }
 
 .ctr_map{
-    width: 65vw;
+    width: 100vw;
     /* box-shadow: 0px 0px 0px 0.3px rgb(160, 157, 157); */
     /* background: #42bfed;  */
     border-right: none; 
@@ -104,7 +104,7 @@ p {
     width: 100%;
     height: 40px;
     margin-bottom: 0;
-    /* background: #f8f8f5; */
+    background: rgb(8, 8, 92);
     box-shadow: 0px 0px 0px 0.1px rgb(160, 157, 157);
     border: none;
 }
@@ -139,7 +139,7 @@ p {
 
 
 .ctr_map .map{
-    width: 60vw;     
+    width: 100vw;     
 }
 
 @media screen and (max-width: 380px) {
@@ -413,6 +413,7 @@ footer section h3{
     font-weight:300;
     font-size: 10px;
     padding-top: 35px;
+    color: white;
 }
 @media screen and (max-width: 380px) {
     footer section h3{
