@@ -165,6 +165,27 @@ export class AppComponent implements OnInit {
     // @Inject('sourceFiles') private sourceFiles: anysourceFiles.files = ['population-data.ts', 'world-map.json'];
   }
 
+  isDataByStateSelected = true
+
+  switchDataButtons1() {
+    this.isDataByStateSelected = true
+  }
+
+  switchDataButtons2() {
+    this.isDataByStateSelected = false
+  }
+
+  setClickedStyle() {
+    if(this.isDataByStateSelected) {
+      return {
+        "background-color": "#00ffd9"
+      }
+    }
+    return {
+      "background-color": "white"
+    }
+  }
+
   ngOnInit(): void {
     this.data.forEach(dt => {
       const vac: Vaccines = {

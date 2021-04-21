@@ -31,155 +31,48 @@
   }
 </style>
 <header>
-  <!-- <img src="assets/image/TAGDEV.png" alt="">/ -->
-
-  <div>
-    <h2>OroData Science Covid-19 Vaccine Tracker</h2>
-  </div>
+  <h2>OroData Science Covid-19 Vaccine Tracker</h2>
 </header>
+
+
 <!-- this container  starts here and holds everything in the body aside from the head -->
 <div class="container">
-  <!-- this sdie bar is the div on the left side  and its starts here-->
-  <div class="sidebar" style="display: none;">
-    <!-- the worldwide div starts here -->
-    <div id="worldwide">
-      <div>
-        <h4>Vaccines Distributed Worldwide</h4>
-        <h5 id="wrld" style="color: green;">{{worldwide_vaccine}}</h5>
-        <!-- <h6>Vaccines distributed worldwide</h6>
-        <h5 id="cnfnd_cases" style="color: blue;">{{africa_vaccine}}</h5> -->
-      </div>
 
-      <div class="active_case">
-        <!-- <li>active casses</li>
-        <h5 id="atve_cases" style="color: red;">700,000,000</h5> -->
-      </div>
+  <div id="mini_container">
 
+    <div id="head">
+      <a href="javascript:void(0)" (click)="switchDataButtons1()" class="country">Data by state </a>
+      <a href="javascript:void(0)" (click)="switchDataButtons2()" class="sector">Data by sector</a>
+      <!-- <a href="javascript:void(0)" class="Pan_afr">PanAfrica Data</a> -->
     </div>
-    <!-- the worldwide div ends here -->
+    <!-- <section>
+      <h2>ONE Africa COVID-19 Tracker</h2>
+      <h3>Click on a country or the controls buttons to begin</h3>
+    </section> -->
 
-    <!-- this is the africa cases div and its starts here -->
-    <div class="Africa">
-      <h3>Vaccines Distributed in Africa</h3>
-      <h4>{{africa_vaccine}}</h4>
-    </div>
-    <!-- this is the africa cases div and its ends here -->
-
-    <!-- this is the nigerian cases div that will house the answer aftr search from the form -->
-    <div id="Nigeria">
-      <h3>Vaccines Distributed in Nigeria</h3>
-      <h4>{{nigeria_vaccine}}</h4>
-    </div>
-
-    <!-- this is a  form  -->
-    <form>
-      <!-- <input type="text" placeholder=" Enter a country"> -->
-      <!-- <button class="buttonload">
-                      <i class="fa fa-spinner fa-spin"></i>Loading
-                    </button> -->
-
-      <button class=" btn  submit" type="button" style="display: none;">
-        <i class="fa fa-circle-o-notch fa-spin loading-sp"></i>
-        <span class="lbl">Submit</span>
-      </button>
-
-      <!-- <button class="buttonload">
-                      <i class="fa fa-refresh fa-spin"></i>Loading
-                    </button> -->
-      <!-- <button class="submit">Search</button> -->
-    </form>
-
-
-
-    <!-- the div starts here is for the info on numbers of cases -->
-    <div class="cases">
-
-      <div class="active" style="display: none;">
-        <h4>Active Cases</h4>
-        <h5>12,045</h5>
-      </div>
-
-      <div class="recovered" style="display: none;">
-        <h4>Recovered</h4>
-        <h5>142,045</h5>
-      </div>
-
-      <div class="deaths" style="display: none;">
-        <h4>Deaths Cases</h4>
-        <h5>2045</h5>
-      </div>
-    </div>
-    <!-- this div ends here -->
-  </div>
-  <!-- sidebar div ends here -->
-
-
-  <!-- this div starts here and this div holds the map image -->
-  <div class="ctr_map">
-
-
-    <!-- this div holds the top area on the image -->
-    <div class="map_lcatn" style="display: none;">
-      <h1>Nigeria</h1>
-    </div>
-    <!-- this div ends here -->
-
-    <!-- this div holds the  the image -->
-    <!-- <img src="assets/image/Web 1920 – 1.png" class="map" alt=""> -->
-    <div class="map">
-      <ejs-maps #maps *ngIf="loaded" style="display:block; height: 700px; width: 100%;"
-        useGroupingSeparator="true" [zoomSettings]='zoomSettings' [layers]='layers' [titleSettings]="titleSettings"
+    <div *ngIf="isDataByStateSelected">
+      <ejs-maps #maps *ngIf="loaded" style="display:block; height: 700px;" useGroupingSeparator="true"
+        [zoomSettings]='zoomSettings' [layers]='layers' [titleSettings]="titleSettings"
         [legendSettings]="legendSettings" (bubbleRendering)="bubbleRendering($event)" (load)="load($event)" format='n'
         useGroupingSeparator="true">
       </ejs-maps>
     </div>
-    <div style="float: right; margin-right: 10px; color: white;">
-    </div>
-    <div style="float: right; margin-right: 10px; color: white;">Source:
-      <a style="color: white;" href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwi8usDVzs7vAhXwQhUIHYWPBLYQFjAAegQIAxAD&url=https%3A%2F%2Fnphcda.gov.ng%2F&usg=AOvVaw32Redc6cgCA-C1QNw_-iRf"
-        target="_blank">National Primary Health Care Development Agency</a>
-    </div>
-    <!-- <div style="float: right; margin-right: 10px;">Last Update: {{last_update}}
-        </div>
-        <div style="float: right; margin-right: 10px;">Source:
-          <a href="https://africadatahub.org"
-            target="_blank">Africa Data Hub</a>
-        </div> -->
-
-    <div class="control-section" style="display: none;">
-      <div class="map">
-        <ejs-chart *ngIf="loaded" style='display:block;' [chartArea]='chartArea' [width]='width' align='center'
-          id='chartcontainer' [primaryXAxis]='primaryXAxis' [primaryYAxis]='primaryYAxis' [title]='barTitle'
-          [tooltip]='tooltip' (load)='loadBar($event)'>
-          <!-- <e-series [dataSource]='data' type='Bar' xName='x' yName='y' name='Vaccines' [marker]='marker'> </e-series> -->
-          <e-series-collection>
-            <e-series [dataSource]='data' type='Bar' xName='x' yName='y' name='Vaccines' [marker]='marker'> </e-series>
-            <!-- <e-series [dataSource]='data1' type='Bar' xName='x' yName='y' name='Exports' [marker]='marker'> </e-series> -->
-          </e-series-collection>
-        </ejs-chart>
-      </div>
-      <div style="float: right; margin-right: 10px;">Last Update: {{last_update}}
-      </div>
-      <div style="float: right; margin-right: 10px;">Source:
-        <a style="color: white;" href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwi8usDVzs7vAhXwQhUIHYWPBLYQFjAAegQIAxAD&url=https%3A%2F%2Fnphcda.gov.ng%2F&usg=AOvVaw32Redc6cgCA-C1QNw_-iRf"
-          target="_blank">National Primary Health Care Development Agency</a>
-      </div>
-    </div>
-
-    <!-- this div that holds the image side ends here -->
-
-    <!-- this is the footer -->
-    <footer>
-      <section>
-        <h3>All Rights Reserved &copy; OroData Science</h3>
-      </section>
-    </footer>
-    <!-- footer ends here -->
-
+    <charts-root *ngIf="!isDataByStateSelected"></charts-root>
   </div>
-  <!-- this div ends here -->
+
+
+
+
+
+
+  <!-- this is the footer -->
+
+  <footer>
+    <section>
+      <h3>All Rights Reserved &copy; TagDev 2021</h3>
+    </section>
+  </footer>
+  <!-- footer ends here -->
+
 </div>
-
-
-
-<router-outlet></router-outlet>
+<!-- this div ends here -->
