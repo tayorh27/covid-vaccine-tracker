@@ -43,7 +43,7 @@
 </div>
 
 <div class="main3_container">
-    <div echarts [options]="options" class="demo-chart" (chartInit)="onChartEvent($event, 'chartInit')"
+    <!-- <div echarts [options]="options" class="demo-chart" (chartInit)="onChartEvent($event, 'chartInit')"
         (chartClick)="onChartEvent($event, 'chartClick')" (chartDblClick)="onChartEvent($event, 'chartDblClick')"
         (chartMouseDown)="onChartEvent($event, 'chartMouseDown')" (chartMouseUp)="onChartEvent($event, 'chartMouseUp')"
         (chartMouseOver)="onChartEvent($event, 'chartMouseOver')"
@@ -51,6 +51,10 @@
         (chartGlobalOut)="onChartEvent($event, 'chartGlobalOut')"
         (chartContextMenu)="onChartEvent($event, 'chartContextMenu')"
         (chartDataZoom)="onChartEvent($event, 'chartDataZoom')">
+    </div> -->
+    <!-- Chart -->
+    <div class="chart">
+        <canvas id="chart-opts" class="chart-canvas"></canvas>
     </div>
 </div>
 

@@ -282,7 +282,7 @@ p {
     flex-direction: row;
     justify-content: space-between;
     border-bottom: 1px solid rgba(255, 255, 255, 0.377);
-    margin-left: 120px; 
+    /* margin-left: 120px;  */
     margin-top: 50px;
     outline: none;
     background: transparent;
@@ -296,10 +296,10 @@ option{
 
 @media screen and (max-width: 480px){
     .Health{
-        width: 60%;
+        /* width: 60%; */
         height: 40px;
         border-bottom:1px solid white;
-        margin-left: 70px; 
+        /* margin-left: 70px;  */
         margin-top: 10px;
     } 
 

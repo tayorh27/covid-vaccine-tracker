@@ -296,7 +296,7 @@ option{
 
 @media screen and (max-width: 480px){
     .Health{
-        width: 60%;
+        /* width: 60%; */
         height: 40px;
         border-bottom:1px solid white;
         margin-left: 70px; 
