@@ -41,8 +41,8 @@
   <div id="mini_container">
 
     <div id="head">
-      <a href="javascript:void(0)" (click)="switchDataButtons1()" class="country">Data by state </a>
-      <a href="javascript:void(0)" (click)="switchDataButtons2()" class="sector">Data by sector</a>
+      <a href="javascript:void(0)" [ngStyle]="setClickedStyle1()" (click)="switchDataButtons1()" class="country">Data by state </a>
+      <a href="javascript:void(0)" [ngStyle]="setClickedStyle2()" (click)="switchDataButtons2()" class="sector">Data by sector</a>
       <!-- <a href="javascript:void(0)" class="Pan_afr">PanAfrica Data</a> -->
     </div>
     <!-- <section>
@@ -69,7 +69,7 @@
 
   <footer>
     <section>
-      <h3>All Rights Reserved &copy; TagDev 2021</h3>
+      <!-- <h3>All Rights Reserved &copy; TagDev 2021</h3> -->
     </section>
   </footer>
   <!-- footer ends here -->

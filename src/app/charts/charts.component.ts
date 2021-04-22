@@ -68,7 +68,7 @@ export class ChartComponent implements OnInit {
 
     ngOnInit() {
         this.viewChart()
-        
+
         const yMax = 500;
         const dataShadow = [];
 
@@ -211,7 +211,7 @@ export class ChartComponent implements OnInit {
             labels: this.dataAxis,
             datasets: [
                 {
-                    label: "Contestants",
+                    label: "",
                     data: this.data
                 }
             ]

@@ -175,8 +175,19 @@ export class AppComponent implements OnInit {
     this.isDataByStateSelected = false
   }
 
-  setClickedStyle() {
+  setClickedStyle1() {
     if(this.isDataByStateSelected) {
+      return {
+        "background-color": "#00ffd9"
+      }
+    }
+    return {
+      "background-color": "white"
+    }
+  }
+
+  setClickedStyle2() {
+    if(!this.isDataByStateSelected) {
       return {
         "background-color": "#00ffd9"
       }

@@ -150,7 +150,7 @@ var colors = {
     'info': '#11cdef',
     'success': '#2dce89',
     'danger': '#f5365c',
-    'warning': '#fb6340'
+    'warning': '#081248'
   },
   black: '#12263F',
   white: '#FFFFFF',

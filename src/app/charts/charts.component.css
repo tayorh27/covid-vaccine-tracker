@@ -4,7 +4,7 @@ header{
     justify-content: space-between;
     padding: 10px;
     width: 100%;
-    background: rgb(252, 252, 253);
+    background: white;
     box-shadow: 1px 1px rgb(207, 207, 207);
 
     /* header responiveness */
@@ -16,7 +16,7 @@ header{
     align-items: center;
     padding: 13px;
     width: 100%;
-    background: rgb(252, 252, 253);
+    background: white;
     box-shadow: 1px 1px rgb(207, 207, 207);
     }
 }
@@ -37,14 +37,14 @@ header img{
 }
 
 header h2{
-    color: grey;
+    color: #081248;
     margin-right: 40px;
     
 }
 
 @media screen and (max-width: 480px) {
     header h2{
-        color: grey;
+        color: #081248;
         margin-left: 8px;
         font-size: 17px;
     }   
@@ -54,14 +54,14 @@ body {
     height: 100vh;
     /* overflow: hidden; */
     font-family: 'Montserrat', sans-serif;
-    background: #f8f8f5;
+    background: white;
 }
 @media screen and (max-width: 480px) {
     body {
         height: 100vh;
         overflow: hidden;
         font-family: 'Montserrat', sans-serif;
-        background: #f8f8f5;
+        background: white;
     }   
 }
 
@@ -89,13 +89,13 @@ p {
 #mini_container{
     
     margin-top:30px ;
-    background-color: #081248;
+    background-color: white;
 }
 
 @media screen and (max-width: 480px){
     #mini_container{
         margin-top:0px ;
-        background-color: #081248;   
+        background-color: white;   
     }
 }
 
@@ -117,7 +117,7 @@ p {
 #head .country{
     padding: 12px 20px;
     background-color: white;
-    border: 1px solid white;
+    border: 1px solid navy;
     color: navy;
     font-weight: bold;
     outline: none;
@@ -127,7 +127,7 @@ p {
 @media screen and (max-width: 480px){
     #head .country{
         padding: 12px 20px;
-        background-color:#081248;  ;
+        background-color:white;
         border: 1px solid white;
         color: white;
         font-weight: bold;
@@ -143,8 +143,8 @@ p {
 
 #head .sector{
     padding: 12px 20px;
-    border: 1px solid white;
-    color: white;
+    border: 1px solid navy;
+    color: navy;
     font-weight: bold;
     margin-left: 5px;
     outline: none;
@@ -154,8 +154,8 @@ p {
 @media screen and (max-width: 480px){
     #head .sector{
         padding: 12px 26px;
-        border: 1px solid white;
-        color: white;
+        border: 1px solid navy;
+        color: navy;
         font-weight: bold;
         margin-left: 1px;
         margin-top: 10px;
@@ -265,13 +265,13 @@ p {
 
 #mini1_container{
     margin-top:30px ;
-    background-color: #081248;
+    background-color: white;
 }
 
 @media screen and (max-width: 480px){
     #mini1_container{
         margin-top:0px ;
-        background-color: #081248;
+        background-color: white;
     } 
 }
 
@@ -401,7 +401,9 @@ option{
 
 .main3_container{
     margin-top:30px ;
-    background-color: #081248;   
+    background-color: white;  
+    margin-left: 70px;
+    margin-right: 70px;  
 }
 
 #DATA{
@@ -448,14 +450,14 @@ option{
 footer{
     height: 80px;
     width: 100%;
-    background: #f8f8f5;
+    background: white;
     margin-top: 20px;
 }
 @media screen and (max-width: 480px) {
     footer{
         height: 80px;
         width: 100%;
-        background: #f8f8f5;
+        background: white;
         margin-top: 20px;
     }  
 }
