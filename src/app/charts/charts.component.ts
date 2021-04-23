@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 // import { EChartsOption } from "echarts";
 // import LinearGradient from 'zrender/lib/graphic/LinearGradient';
 import Chart from 'chart.js';
+import { DummyData } from "../population-data";
 // core components
 import {
     chartOptions,
@@ -42,7 +43,7 @@ export class ChartComponent implements OnInit {
         'Cross River',
         'Delta',
         'Ebonyi',
-        'Edo', ,
+        'Edo',
         'Ekiti',
         'Enugu',
         'Federal Capital Territory',
@@ -70,34 +71,43 @@ export class ChartComponent implements OnInit {
         'Zamfara'
     ];
 
-    data = [
-        220,
-        182,
-        191,
-        234,
-        290,
-        330,
-        310,
-        123,
-        442,
-        321,
-        90,
-        149,
-        210,
-        122,
-        133,
-        334,
-        198,
-        123,
-        125,
-        220,
-    ];
+    data = [];
 
     onTrackerChange(evt: any) {
         const option = this.subDataTracker.find((val, arr, ind) => {
             return val.name === evt.target.value
         })
         this.displayOptions = option.options;
+    }
+
+    onSubTrackerChanged(evt: any) {
+        if(evt.target.value === "Total confirmed covid-19 cases") {
+            this.data = new DummyData().mapData.map((val) => val.cases)
+            this.viewChart()
+            return
+        }
+        if(evt.target.value === "Total confirmed deaths") {
+            this.data = new DummyData().mapData.map((val) => val.death)
+            this.viewChart()
+            return
+        }
+        if(evt.target.value === "Share of population living in extreme poverty") {
+            this.data = new DummyData().mapData.map((val) => val.poverty)
+            this.viewChart()
+            return
+        }
+        if(evt.target.value === "Total population") {
+            this.data = new DummyData().mapData.map((val) => val.population)
+            this.viewChart()
+            return
+        }
+        if(evt.target.value === "") {
+            return
+        }
+    }
+
+    updateChart() {
+
     }
 
     ngOnInit() {
@@ -108,90 +118,8 @@ export class ChartComponent implements OnInit {
 
         this.displayOptions = option.options;
 
+        this.data = new DummyData().mapData.map((val) => val.cases)
         this.viewChart()
-
-        const yMax = 500;
-        const dataShadow = [];
-
-        // tslint:disable-next-line: prefer-for-of
-        for (let i = 0; i < this.data.length; i++) {
-            dataShadow.push(yMax);
-        }
-
-        this.options = {
-            title: {
-                text: '',
-            },
-            tooltip: {
-                trigger: 'item',
-                formatter: '{a} <br/>{b} : {c}',
-            },
-            xAxis: {
-                data: this.dataAxis,
-                axisLabel: {
-                    inside: true,
-                    color: '#fff',
-                },
-                axisTick: {
-                    show: true,
-                },
-                axisLine: {
-                    show: true,
-                },
-                z: 10,
-            },
-            yAxis: {
-                axisLine: {
-                    show: true,
-                },
-                axisTick: {
-                    show: true,
-                },
-                axisLabel: {
-                    textStyle: {
-                        color: '#999',
-                    },
-                },
-            },
-            dataZoom: [
-                {
-                    type: 'outside',
-                },
-            ],
-            series: [
-                {
-                    // For shadow
-                    type: 'bar',
-                    itemStyle: {
-                        color: 'rgba(0,0,0,0.05)'
-                    },
-                    barGap: '-100%',
-                    barCategoryGap: '40%',
-                    data: dataShadow,
-                    animation: true,
-                },
-                {
-                    type: 'bar',
-                    itemStyle: {
-                        // color: new LinearGradient(0, 0, 0, 1, [
-                        //     { offset: 0, color: '#83bff6' },
-                        //     { offset: 0.5, color: '#188df0' },
-                        //     { offset: 1, color: '#188df0' },
-                        // ]),
-                    },
-                    emphasis: {
-                        itemStyle: {
-                            // color: new LinearGradient(0, 0, 0, 1, [
-                            //     { offset: 0, color: '#2378f7' },
-                            //     { offset: 0.7, color: '#2378f7' },
-                            //     { offset: 1, color: '#83bff6' },
-                            // ]),
-                        }
-                    },
-                    // this.data,
-                },
-            ],
-        };
     }
 
     onChartEvent(event: any, type: string) {
@@ -221,10 +149,17 @@ export class ChartComponent implements OnInit {
                     {
                         ticks: {
                             callback: function (value) {
-                                if (!(value % 10)) {
-                                    //return '$' + value + 'k'
-                                    return value;
-                                }
+                                // if (!(value % 10)) {
+                                //     //return '$' + value + 'k'
+                                    
+                                // }
+                                const formatter = new Intl.NumberFormat('en-US', {
+                                    style: 'currency',
+                                    currency: 'NGN',
+                                    minimumFractionDigits: 2
+                                  })
+                                const f = formatter.format(value)
+                                return f.substring(4, f.length - 3)
                             }
                         }
                     }
@@ -233,13 +168,21 @@ export class ChartComponent implements OnInit {
             tooltips: {
                 callbacks: {
                     label: function (item, data) {
+                        const formatter = new Intl.NumberFormat('en-US', {
+                            style: 'currency',
+                            currency: 'NGN',
+                            minimumFractionDigits: 2
+                          })
+                          const f = formatter.format(item.yLabel)
+                          const result = f.substring(4, f.length - 3)
                         var label = data.datasets[item.datasetIndex].label || "";
-                        var yLabel = item.yLabel;
+                        var yLabel = (item.yLabel === 0) ? item.yLabel : result;
                         var content = "";
                         if (data.datasets.length > 1) {
                             content += label;
                         }
                         content += yLabel;
+                        // console.log(item, data, content)
                         return content;
                     }
                 }

@@ -26,7 +26,7 @@
         <select name="tracker" style="border: none;
               width: 100%;
               color: navy;font-size: 20px;
-              font-weight: bold;">
+              font-weight: bold;" (change)="onSubTrackerChanged($event)">
 
             <option *ngFor="let dt of displayOptions;" value="{{dt}}">{{dt}}</option>
             <!-- <option value="health">Population</option>

@@ -2,6 +2,46 @@ export class DummyData {
 
     constructor(){}
 
+    mapData: any[] = [//Object
+        { x: 'Abia', y: 12046, delivered: 4734, cost: 0, cases: 1689, death: 22, recover: 1651, population: 3727347, poverty: 1144295 }, 
+        { x: 'Adamawa', y: 20549, delivered: 14240, cost: 0, cases: 1063, death: 32, recover: 274, population: 4248436, poverty: 3203745 },
+        { x: 'Akwa Ibom', y: 12781, delivered: 4729, cost: 0, cases: 1847, death: 14, recover: 1766, population: 5482177, poverty: 1469223 }, 
+        { x: 'Anambra', y: 11934, delivered: 3616, cost: 0, cases: 1909, death: 19, recover: 1826, population: 5527809, poverty: 818115 },
+        { x: 'Bauchi', y: 36535, delivered: 33137, cost: 0, cases: 1548, death: 17, recover: 1518, population: 6537314, poverty: 4022409 }, 
+        { x: 'Bayelsa', y: 10757, delivered: 5239, cost: 0, cases: 885, death: 26, recover: 855, population: 2277961, poverty: 514819 },
+        { x: 'Benue', y: 22802, delivered: 14206, cost: 0, cases: 1188, death: 22, recover: 591, population: 5741815, poverty: 1889057 }, 
+        { x: 'Borno', y: 22364, delivered: 13239, cost: 0, cases: 1337, death: 38, recover: 1200, population: 5860183, poverty: 987486 },
+        { x: 'Cross River', y: 15961, delivered: 9465, cost: 0, cases: 394, death: 18, recover: 372, population: 3866269, poverty: 1403455 }, 
+        { x: 'Delta', y: 22037, delivered: 11327, cost: 0, cases: 2617, death: 71, recover: 1744, population: 5663362, poverty: 339802 },
+        { x: 'Ebonyi', y: 9741, delivered: 4120, cost: 0, cases: 2030, death: 32, recover: 1965, population: 2880383, poverty: 2297393 }, 
+        { x: 'Edo', y: 29740, delivered: 21829, cost: 0, cases: 4898, death: 185, recover: 4709, population: 4235595, poverty: 508271 },
+        { x: 'Ekiti', y:23685, delivered: 21174, cost: 0, cases: 869, death: 11, recover: 847, population: 3270798, poverty: 915823 }, 
+        { x: 'Enugu', y: 13602, delivered: 5658, cost: 0, cases: 2345, death: 29, recover: 2013, population: 4411119, poverty: 2564183 },
+        { x: 'Federal Capital Territory', y: 54298, delivered: 26823, cost: 0, cases: 19758, death: 165, recover: 19088, population: 3564126, poverty: 1379316 }, 
+        { x: 'Gombe', y: 27404, delivered: 21046, cost: 0, cases: 2034, death: 44, recover: 1986, population: 3256962, poverty: 2029413 },
+        { x: 'Imo', y: 19929, delivered: 9845, cost: 0, cases: 1657, death:37 , recover: 1592, population: 5408756, poverty: 1563130 }, 
+        { x: 'Jigawa', y: 29426, delivered: 25277, cost: 0, cases: 527, death: 16, recover: 485, population: 5828163, poverty: 5071667 },
+        { x: 'Kaduna', y: 58809, delivered: 38461, cost: 0, cases: 9038, death: 65, recover: 8935, population: 8252366, poverty: 3589779 }, 
+        { x: 'Kano', y: 59374, delivered: 33665, cost: 0, cases: 3952, death: 110, recover: 3818, population: 13076892, poverty: 7205367 },
+        { x: 'Katsina', y: 39693, delivered: 29293, cost: 0, cases: 2097, death: 34, recover: 2049, population: 7831319, poverty: 4418430 }, 
+        { x: 'Kebbi', y: 16177, delivered: 9059, cost: 0, cases: 450, death: 16, recover: 392, population: 4440050, poverty: 2228905 },
+        { x: 'Kogi', y: 12171, delivered: 8763, cost: 0, cases: 5, death: 2, recover: 33, population: 4473490, poverty: 1274944 }, 
+        { x: 'Kwara', y: 31282, delivered: 35067, cost: 0, cases: 3120, death: 55, recover: 2814, population: 3192893, poverty: 651350 },
+        { x: 'Lagos', y: 223159, delivered: 196157, cost: 0, cases: 58230, death: 439, recover: 56990, population: 12550598, poverty: 564777 }, 
+        { x: 'Nasarawa', y: 18348, delivered: 10972, cost: 0, cases: 2381, death: 13, recover: 373, population: 2523395, poverty: 1445905 },
+        { x: 'Niger', y: 27549, delivered: 20469, cost: 0, cases: 930, death: 17, recover: 913, population: 5556247, poverty: 3673234}, 
+        { x: 'Ogun', y: 53355, delivered: 50314, cost: 0, cases: 4647, death: 49, recover: 4571, population: 5217716, poverty: 485248 },
+        { x: 'Ondo', y: 31592, delivered: 27138, cost: 0, cases: 3242, death: 63, recover: 2080, population: 4671695, poverty: 583962 }, 
+        { x: 'Osun', y: 21413, delivered: 14282, cost: 0, cases: 2575, death: 52, recover: 2492, population: 4705589, poverty: 399975 },
+        { x: 'Oyo', y: 41171, delivered: 26555, cost: 0, cases: 6844, death: 123, recover: 6506, population: 7840864, poverty: 768405 }, 
+        { x: 'Plateau', y: 28988, delivered: 15914, cost: 0, cases: 9049, death: 57, recover: 8982, population: 4200442, poverty: 2314443 },
+        { x: 'Rivers', y: 30504, delivered: 12385, cost: 0, cases: 7073, death: 101, recover: 6931, population: 7303924, poverty: 1745638 }, 
+        { x: 'Sokoto', y: 12016, delivered: 4206, cost: 0, cases: 775, death: 28, recover: 746, population: 4998090, poverty: 4384824 },
+        { x: 'Taraba', y: 9471, delivered: 3192, cost: 0, cases: 974, death: 22, recover: 950, population: 3066834, poverty: 2690226 }, 
+        { x: 'Yobe', y: 21354, delivered: 14798, cost: 0, cases: 371, death: 9, recover: 330, population: 3294137, poverty: 2382978 },
+        { x: 'Zamfara', y: 16151, delivered: 93355, cost: 0, cases: 240, death: 2, recover: 3, population: 4515427, poverty: 3340513 }
+      ];
+
     population: any[] = [
         { 'name': 'Afghanistan', 'value': this.bubblesize(32358260), 'color': '#7F38A0 ' },
         { 'name': 'Albania', 'value': this.bubblesize(32159880), 'color': '#2E769F' },
