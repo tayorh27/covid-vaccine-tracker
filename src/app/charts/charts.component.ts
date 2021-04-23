@@ -21,11 +21,11 @@ export class ChartComponent implements OnInit {
     options: any;
 
     subDataTracker = [
-        { "name": "health" }, { "options": ["Total confirmed covid-19 cases", "Total confirmed deaths", "Available ventilators", "Health ODA received", "Hospital beds", "Vaccination logistics expenditure"] },
-        { "name": "demography" }, { "options": ["Expectancy", "Share of population living in extreme poverty", "Population density", "Total population"] },
-        { "name": "economics" }, { "options": ["GDP per capita", "2020 Multilateral debt service", "2020 Federal Allocation", "Bilateral debt service", "2020 revenue", "Growth rate", "State of available revenue", "Ability to meet recurrent expenditure", "Health budget (capital expenditure and total debt)"] },
-        { "name": "governance" }, { "options": ["State budget allocations", "Covid-support measures", "Income support measures"] },
-        { "name": "food" }, { "options": ["Food inflation", "People with insufficient food intake", "Children under the age of 5 with acute malnutrition", "Children under 5 with chronic malnutrition"] }
+        { "name": "health", "options": ["Total confirmed covid-19 cases", "Total confirmed deaths", "Available ventilators", "Health ODA received", "Hospital beds", "Vaccination logistics expenditure"] },
+        { "name": "demography" , "options": ["Expectancy", "Share of population living in extreme poverty", "Population density", "Total population"] },
+        { "name": "economics" , "options": ["GDP per capita", "2020 Multilateral debt service", "2020 Federal Allocation", "Bilateral debt service", "2020 revenue", "Growth rate", "State of available revenue", "Ability to meet recurrent expenditure", "Health budget (capital expenditure and total debt)"] },
+        { "name": "governance" , "options": ["State budget allocations", "Covid-support measures", "Income support measures"] },
+        { "name": "food" , "options": ["Food inflation", "People with insufficient food intake", "Children under the age of 5 with acute malnutrition", "Children under 5 with chronic malnutrition"] }
     ]
 
     displayOptions = []
