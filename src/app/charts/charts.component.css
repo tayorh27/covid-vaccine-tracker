@@ -291,7 +291,7 @@ p {
     font-weight: bold;
 }
 option{
-    background-color: #081248;
+    /* background-color: #081248; */
 }
 
 @media screen and (max-width: 480px){
@@ -328,8 +328,7 @@ option{
     justify-content: space-between;
     border-bottom: 1px solid rgba(255, 255, 255, 0.377);
     margin-left: 120px; 
-    margin-top: 50px;
-    outline: none;
+    margin-top: 20px;
     background: transparent;
     color: white;
     font-size: 20px;

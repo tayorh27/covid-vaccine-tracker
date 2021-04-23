@@ -5,20 +5,17 @@
       <a href="" class="sector">Data by sector</a>
       <a href="" class="Pan_afr">PanAfrica Data</a>
     </div> -->
-
     <span class="Health">
         <!-- <h3>Health</h3> -->
         <select name="tracker" style="border: none;
-              background: transparent;
               width: 100%;
               color: navy;font-size: 20px;
-              font-weight: bold;">
-
-            <option style="background: #081248;" value="health">Health</option>
-            <option value="health">Population</option>
+              font-weight: bold;" (change)="onTrackerChange($event)">
             <option value="health">Health</option>
-            <option value="health">Health</option>
-            <option value="health">Health</option>
+            <option value="demography">Demography</option>
+            <option value="economics">Economics</option>
+            <option value="governance">Governance</option>
+            <option value="food">Food</option>
         </select>
         <!-- <img src="image/icons8_sort_down_24px_1.png" class="sort_down1" alt=""> -->
     </span>
@@ -27,16 +24,15 @@
     <span class="Total confirmed cases">
         <!-- <h3>Health</h3> -->
         <select name="tracker" style="border: none;
-              background: transparent;
               width: 100%;
               color: navy;font-size: 20px;
               font-weight: bold;">
 
+            <option *ngFor="let dt of displayOptions;" value="{{dt}}">{{dt}}</option>
+            <!-- <option value="health">Population</option>
             <option value="health">Health</option>
-            <option value="health">Population</option>
             <option value="health">Health</option>
-            <option value="health">Health</option>
-            <option value="health">Health</option>
+            <option value="health">Health</option> -->
         </select>
         <!-- <img src="image/icons8_sort_down_24px_1.png" class="sort_down1" alt=""> -->
     </span>
