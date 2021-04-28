@@ -21,8 +21,10 @@ export class ChartComponent implements OnInit {
 
     options: any;
 
+    source = "";
+
     subDataTracker = [
-        { "name": "health", "options": ["Total confirmed covid-19 cases", "Total confirmed deaths", "Available ventilators", "Health ODA received", "Hospital beds", "Vaccination logistics expenditure"] },
+        { "name": "health", "options": ["Total confirmed covid-19 cases", "Total confirmed deaths", "Available ventilators", "Health ODA received", "Hospital beds", "Vaccination logistics expenditure", "FGN Covid-19 support to state"] },
         { "name": "demography" , "options": ["Expectancy", "Share of population living in extreme poverty", "Population density", "Total population"] },
         { "name": "economics" , "options": ["GDP per capita", "2020 Multilateral debt service", "2020 Federal Allocation", "Bilateral debt service", "2020 revenue", "Growth rate", "State of available revenue", "Ability to meet recurrent expenditure", "Health budget (capital expenditure and total debt)"] },
         { "name": "governance" , "options": ["State budget allocations", "Covid-support measures", "Income support measures"] },
@@ -73,6 +75,8 @@ export class ChartComponent implements OnInit {
 
     data = [];
 
+    ordersChart:any
+
     onTrackerChange(evt: any) {
         const option = this.subDataTracker.find((val, arr, ind) => {
             return val.name === evt.target.value
@@ -83,25 +87,41 @@ export class ChartComponent implements OnInit {
     onSubTrackerChanged(evt: any) {
         if(evt.target.value === "Total confirmed covid-19 cases") {
             this.data = new DummyData().mapData.map((val) => val.cases)
+            this.ordersChart.destroy()
             this.viewChart()
             return
         }
         if(evt.target.value === "Total confirmed deaths") {
             this.data = new DummyData().mapData.map((val) => val.death)
+            this.ordersChart.destroy()
             this.viewChart()
             return
         }
         if(evt.target.value === "Share of population living in extreme poverty") {
+            this.source = "Source: Statista"
             this.data = new DummyData().mapData.map((val) => val.poverty)
+            this.ordersChart.destroy()
             this.viewChart()
             return
         }
         if(evt.target.value === "Total population") {
             this.data = new DummyData().mapData.map((val) => val.population)
+            this.ordersChart.destroy()
             this.viewChart()
             return
         }
-        if(evt.target.value === "") {
+        if(evt.target.value === "Vaccination logistics expenditure") {
+            this.source = "Source: NPHCDA"
+            this.data = new DummyData().mapData.map((val) => val.cost)
+            this.ordersChart.destroy()
+            this.viewChart()
+            return
+        }
+        if(evt.target.value === "FGN Covid-19 support to state") {
+            this.source = "Source: Federal Ministry of Finance, Presidential Task Force, UN, DPG-H, NCDC"
+            this.data = new DummyData().mapData.map((val) => val.covid_support)
+            this.ordersChart.destroy()
+            this.viewChart()
             return
         }
     }
@@ -202,7 +222,7 @@ export class ChartComponent implements OnInit {
         }
         var chartOrders = document.getElementById('chart-opts');
         parseOptions(Chart, chartOptions())
-        var ordersChart = new Chart(chartOrders, {
+        this.ordersChart = new Chart(chartOrders, {
             type: 'bar',
             options: this.constestantChart.options,
             data: myData
