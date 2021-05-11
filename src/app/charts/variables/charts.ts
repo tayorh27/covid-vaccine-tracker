@@ -127,7 +127,7 @@ Chart.elements.Rectangle.prototype.draw = function() {
 
 var mode = 'light';//(themeMode) ? themeMode : 'light';
 var fonts = {
-  base: 'Open Sans'
+  base: 'Montserrat, sans-serif'
 }
 
 // Colors
@@ -150,12 +150,12 @@ var colors = {
     'info': '#11cdef',
     'success': '#2dce89',
     'danger': '#f5365c',
-    'warning': '#081248'
+    'warning': '#00ffd9'
   },
   black: '#12263F',
   white: '#FFFFFF',
   transparent: 'transparent',
-};
+};//081248
 
 export function chartOptions() {
 
