@@ -9,7 +9,7 @@
         <!-- <h3>Health</h3> -->
         <select name="tracker" style="border: none;
               width: 100%;
-              color: navy;font-size: 20px;
+              color: #000000b5;font-size: 20px;
               font-weight: bold;" (change)="onTrackerChange($event)">
             <option value="health">Health</option>
             <option value="demography">Demography</option>
@@ -25,7 +25,7 @@
         <!-- <h3>Health</h3> -->
         <select name="tracker" style="border: none;
               width: 100%;
-              color: navy;font-size: 20px;
+              color: #000000b5;font-size: 20px;
               font-weight: bold;" (change)="onSubTrackerChanged($event)">
 
             <option *ngFor="let dt of displayOptions;" value="{{dt}}">{{dt}}</option>
@@ -49,8 +49,8 @@
         (chartDataZoom)="onChartEvent($event, 'chartDataZoom')">
     </div> -->
     <!-- Chart -->
-    <div class="chart" style="height: 500px;">
-        <canvas id="chart-opts" class="chart-canvas"></canvas>
+    <div class="chart">
+        <canvas id="chart-opts" class="chart-canvas" style="display: block; box-sizing: border-box; height: 384px; width: 773px;"></canvas>
     </div>
 </div>
 

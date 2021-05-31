@@ -25,11 +25,11 @@ export class ChartComponent implements OnInit {
     source = "";
 
     subDataTracker = [
-        { "name": "health", "options": ["-", "Total confirmed covid-19 cases", "Total confirmed deaths", "Vaccination logistics expenditure", "FGN Covid-19 support to state"] },
-        { "name": "demography", "options": ["-", "Life Expectancy", "Share of population living in extreme poverty", "Population density", "Total population"] },
-        { "name": "economy", "options": ["-", "Revenue Analysis", "6-Year Growth Analyis", "Structure of State Available Revenue", "2019 Ability to meet Recurrent Expenditure", "Actual Expenditure 2019", "Health Budget", "Actual Capital Expenditure", "Total Debt", "Debt Stock 2019", "Debt Growth", "Debt Size", "Total Debt Trend (2014 - 2019)"] },
-        { "name": "governance", "options": ["-", "State budget allocations", "Covid-support measures", "Income support measures"] },
-        { "name": "food", "options": ["-", "Food inflation", "People with insufficient food intake", "Children under the age of 5 with acute malnutrition", "Children under 5 with chronic malnutrition"] }
+        { "name": "health", "options": ["-", "Total Confirmed Covid-19 Cases", "Total Confirmed Deaths", "Vaccination Logistics Expenditure", "FGN Covid-19 Support to State"] },
+        { "name": "demography", "options": ["-", "Life Expectancy", "Share of Population Living in Extreme Poverty", "Population Density", "Total Population"] },
+        { "name": "economy", "options": ["-", "Revenue Analysis", "6-Year Growth Analyis", "Structure of State Available Revenue", "2019 Ability to Meet Recurrent Expenditure", "Actual Expenditure 2019", "Health Budget", "Actual Capital Expenditure", "Total Debt", "Debt Stock 2019",  "Debt Stock 2019 - 2", "Debt Growth", "Debt Size", "Total Debt Trend (2014 - 2019)"] },
+        { "name": "governance", "options": ["-", "State Budget Allocations", "Covid-Support Measures", "Income Support Measures"] },
+        { "name": "food", "options": ["-", "Food Inflation", "People with Insufficient Food Intake", "Children under the age of 5 with acute malnutrition", "Children under 5 with chronic malnutrition"] }
     ]
 
     displayOptions = []
@@ -86,43 +86,43 @@ export class ChartComponent implements OnInit {
     }
 
     onSubTrackerChanged(evt: any) {
-        if (evt.target.value === "Total confirmed covid-19 cases") {
+        if (evt.target.value === "Total Confirmed Covid-19 Cases") {
             this.data = new DummyData().mapData.map((val) => val.cases)
             this.ordersChart.destroy()
-            this.viewChartForGeneral("Total confirmed covid-19 cases")
+            this.viewChartForGeneral("Total Confirmed Covid-19 Cases", "#de5460")
             return
         }
-        if (evt.target.value === "Total confirmed deaths") {
+        if (evt.target.value === "Total Confirmed Deaths") {
             this.data = new DummyData().mapData.map((val) => val.death)
             this.ordersChart.destroy()
-            this.viewChartForGeneral("Total confirmed deaths")
+            this.viewChartForGeneral("Total Confirmed Deaths", "#d93b4a")
             return
         }
-        if (evt.target.value === "Share of population living in extreme poverty") {
+        if (evt.target.value === "Share of Population Living in Extreme Poverty") {
             this.source = "Source: Statista"
             this.data = new DummyData().mapData.map((val) => val.poverty)
             this.ordersChart.destroy()
-            this.viewChartForGeneral("Share of population living in extreme poverty")
+            this.viewChartForGeneral("Share of Population Living in Extreme Poverty", "#de5460")
             return
         }
-        if (evt.target.value === "Total population") {
+        if (evt.target.value === "Total Population") {
             this.data = new DummyData().mapData.map((val) => val.population)
             this.ordersChart.destroy()
-            this.viewChartForGeneral("Total population")
+            this.viewChartForGeneral("Total Population", "#00aeaa")
             return
         }
-        if (evt.target.value === "Vaccination logistics expenditure") {
+        if (evt.target.value === "Vaccination Logistics Expenditure") {
             this.source = "Source: NPHCDA"
             this.data = new DummyData().mapData.map((val) => val.cost)
             this.ordersChart.destroy()
-            this.viewChartForGeneral("Vaccination logistics expenditure")
+            this.viewChartForGeneral("Vaccination Logistics Expenditure", "#00aeaa")
             return
         }
         if (evt.target.value === "FGN Covid-19 support to state") {
             this.source = "Source: Federal Ministry of Finance, Presidential Task Force, UN, DPG-H, NCDC"
             this.data = new DummyData().mapData.map((val) => val.covid_support)
             this.ordersChart.destroy()
-            this.viewChartForGeneral("FGN Covid-19 support to state")
+            this.viewChartForGeneral("FGN Covid-19 Support to State", "#00aeaa")
             return
         }
 
@@ -133,7 +133,7 @@ export class ChartComponent implements OnInit {
             const data2 = economicData.map((val) => val.Revenue_Analysis_Net_FACC)
             this.ordersChart.destroy()
             // this.viewChartForEconomy("Revenue Analysis (IGR - 2019)")
-            this.viewChartForEconomyStacked("Revenue Analysis[2014 - 2019] - IGR (NGN)", "Revenue Analysis[2014 - 2019] - NET FACC (NGN)", data1, data2, false)
+            this.viewChartForEconomyStacked("Revenue Analysis[2014 - 2019] - IGR (NGN)", "Revenue Analysis[2014 - 2019] - NET FACC (NGN)", data1, data2, false, false, ["#4bc0c0","#36a2eb"])
             return
         }
 
@@ -143,7 +143,7 @@ export class ChartComponent implements OnInit {
             const data2 = economicData2.map((val) => val.Year_Growth_Analyis_Net_FACC)
             this.ordersChart.destroy()
             // this.viewChartForEconomy("Revenue Analysis (IGR - 2019)")
-            this.viewChartForEconomyStacked("6-Year Growth Analyis[2014 - 2019] - IGR (%)", "6-Year Growth Analyis[2014 - 2019] - NET FACC (%)", data1, data2, true)
+            this.viewChartForEconomyStacked("6-Year Growth Analyis[2014 - 2019] - IGR (%)", "6-Year Growth Analyis[2014 - 2019] - NET FACC (%)", data1, data2, true, false, ["#4bc0c0","#36a2eb"])
             return
         }
 
@@ -153,17 +153,17 @@ export class ChartComponent implements OnInit {
             const data2 = economicData2.map((val) => val.Structure_of_State_Available_Revenue_Net_FACC)
             this.ordersChart.destroy()
             // this.viewChartForEconomy("Revenue Analysis (IGR - 2019)")
-            this.viewChartForEconomyStacked("Structure of State Available Revenue[2019] - IGR (%)", "Structure of State Available Revenue[2019] - NET FACC (%)", data1, data2, true)
+            this.viewChartForEconomyStacked("Structure of State Available Revenue[2019] - IGR (%)", "Structure of State Available Revenue[2019] - NET FACC (%)", data1, data2, true, false, ["#4bc0c0","#36a2eb"])
             return
         }
 
-        if (evt.target.value === "2019 Ability to meet Recurrent Expenditure") {
+        if (evt.target.value === "2019 Ability to Meet Recurrent Expenditure") {
             this.source = "Source: Budgit"
             const data1 = economicData.map((val) => val.Ability_to_meet_Recurrent_Expenditure_total_revenue)
             const data2 = economicData.map((val) => val.Ability_to_meet_Recurrent_Expenditure_recurrent_expenditure)
             this.ordersChart.destroy()
             // this.viewChartForEconomy("Revenue Analysis (IGR - 2019)")
-            this.viewChartForEconomyStacked("Total Revenue (NGN)", "Recurrent Expenditure (NGN)", data1, data2, false)
+            this.viewChartForEconomyStacked("Total Revenue (NGN)", "Recurrent Expenditure (NGN)", data1, data2, false, false, ["#4bc0c0","#d93b4a"])
             return
         }
 
@@ -173,50 +173,60 @@ export class ChartComponent implements OnInit {
             const data2 = economicData.map((val) => val.Actual_Expenditure_2019_Recurrent_Expenditure)
             this.ordersChart.destroy()
             // this.viewChartForEconomy("Revenue Analysis (IGR - 2019)")
-            this.viewChartForEconomyStacked("Capital Expenditure (NGN)", "Recurrent Expenditure (NGN)", data1, data2, false)
+            this.viewChartForEconomyStacked("Capital Expenditure (NGN)", "Recurrent Expenditure (NGN)", data1, data2, false, false, ["#4bc0c0","#d93b4a"])
             return
         }
         if (evt.target.value === "Health Budget") {
             this.source = "Source: Budgit"
             this.data = economicData.map((val) => val.Health_Budget_per_capita)
             this.ordersChart.destroy()
-            this.viewChartForEconomy("Health Budget (per capita) - NGN")
+            this.viewChartForEconomy("2020 Health Budget (per capita) - NGN", "#36a2eb")
             return
         }
         if (evt.target.value === "Actual Capital Expenditure") {
             this.source = "Source: Budgit"
             this.data = economicData.map((val) => val.Actual_Capital_Expenditure_per_capita)
             this.ordersChart.destroy()
-            this.viewChartForEconomy("Actual Capital Expenditure (per capita) - NGN")
+            this.viewChartForEconomy("2020 Actual Capital Expenditure (per capita) - NGN", "#4bc0c0")
             return
         }
         if (evt.target.value === "Total Debt") {
             this.source = "Source: Budgit"
             this.data = economicData.map((val) => val.Total_Debt_per_capita)
             this.ordersChart.destroy()
-            this.viewChartForEconomy("Total Debt (per capita) - NGN")
+            this.viewChartForEconomy("2020 Total Debt (per capita) - NGN", "#d93b4a")
             return
         }
         if (evt.target.value === "Debt Stock 2019") {
             this.source = "Source: Budgit"
-            const data1 = economicData.map((val) => val.Debt_Stock_2019_Domestic_Debt)
+            this.data = economicData.map((val) => val.Debt_Stock_2019_Domestic_Debt)
             const data2 = economicData.map((val) => val.Debt_Stock_2019_External_Debt)//1000000000
             this.ordersChart.destroy()
-            this.viewChartForEconomyStacked("Domestic Debt (NGN)", "External Debt (USD)", data1, data2, false, true)
+            this.viewChartForEconomy("Domestic Debt (NGN)","#d93b4a")
+            // this.viewChartForEconomyStacked("Domestic Debt (NGN)", "External Debt (USD)", data1, data2, false, true, ["#","#d93b4a"])
+            return
+        }
+        if (evt.target.value === "Debt Stock 2019 - 2") {
+            this.source = "Source: Budgit"
+            const data1 = economicData.map((val) => val.Debt_Stock_2019_Domestic_Debt)
+            this.data = economicData.map((val) => val.Debt_Stock_2019_External_Debt / 1000000000)//1000000000
+            this.ordersChart.destroy()
+            this.viewChartForEconomy("External Debt (USD)","#d93b4a")
+            // this.viewChartForEconomyStacked("Domestic Debt (NGN)", "External Debt (USD)", data1, data2, false, true, ["#","#d93b4a"])
             return
         }
         if (evt.target.value === "Debt Growth") {
             this.source = "Source: Budgit"
             this.data = economicData.map((val) => val.Debt_Growth)
             this.ordersChart.destroy()
-            this.viewChartForEconomy("Debt Growth[2014 - 2019] (%)")
+            this.viewChartForEconomy("Debt Growth[2014 - 2019] (%)", "#d93b4a")
             return
         }
         if (evt.target.value === "Debt Size") {
             this.source = "Source: Budgit"
             this.data = economicData.map((val) => val.Debt_Size)
             this.ordersChart.destroy()
-            this.viewChartForEconomy("Debt Size (position)")
+            this.viewChartForEconomy("2020 Debt Size (position)", "#d93b4a")
             return
         }
         if (evt.target.value === "Total Debt Trend (2014 - 2019)") {
@@ -232,6 +242,9 @@ export class ChartComponent implements OnInit {
             this.viewChartForEconomyLine(data,data2,data3,data4,data5, data6)
             return
         }
+        this.data = []
+        this.ordersChart.destroy()
+        this.viewChartForGeneral("No data available yet","#")
     }
 
     updateChart() {
@@ -247,7 +260,7 @@ export class ChartComponent implements OnInit {
         this.displayOptions = option.options;
 
         this.data = new DummyData().mapData.map((val) => val.cases)
-        this.viewChartForGeneral("Total confirmed covid-19 cases")
+        this.viewChartForGeneral("Total Confirmed Covid-19 Cases", "#de5460")
     }
 
     onChartEvent(event: any, type: string) {
@@ -333,6 +346,7 @@ export class ChartComponent implements OnInit {
 
     economyChartStacked = {
         options: {
+            responsive: true,
             scales: {
                 x: {
                     stacked: true,
@@ -368,8 +382,6 @@ export class ChartComponent implements OnInit {
                     }
                 }
             },
-            responsive: true,
-            stacked: true,
             tooltips: {
                 callbacks: {
                     label: function (item, data) {
@@ -397,6 +409,7 @@ export class ChartComponent implements OnInit {
 
     economyChartStackedPercentage = {
         options: {
+            responsive: true,
             scales: {
                 x: {
                     stacked: true,
@@ -426,8 +439,6 @@ export class ChartComponent implements OnInit {
                     }
                 }
             },
-            responsive: true,
-            stacked: true,
             tooltips: {
                 callbacks: {
                     label: function (item, data) {
@@ -449,6 +460,7 @@ export class ChartComponent implements OnInit {
 
     economyChartStackedDebtStock = {
         options: {
+            responsive: true,
             scales: {
                 x: {
                     stacked: true,
@@ -485,8 +497,6 @@ export class ChartComponent implements OnInit {
                     }
                 }
             },
-            responsive: true,
-            stacked: true,
             tooltips: {
                 callbacks: {
                     label: function (item, data) {
@@ -576,15 +586,15 @@ export class ChartComponent implements OnInit {
         },
     };
 
-    viewChartForGeneral(title: string) {
+    viewChartForGeneral(title: string, color:string) {
         const myData = {
             labels: this.dataAxis,
             datasets: [
                 {
                     label: title,
                     data: this.data,
-                    borderColor: "#00ffd9",
-                    backgroundColor: "#00ffd9",
+                    borderColor: color,//"#00ffd9",
+                    backgroundColor: color,
                 }
             ]
         }
@@ -598,15 +608,15 @@ export class ChartComponent implements OnInit {
         // ordersChart.update();
     }
 
-    viewChartForEconomy(title: string) {
+    viewChartForEconomy(title: string, color:string) {
         const myData = {
             labels: economicData.map((val) => val.x),
             datasets: [
                 {
                     label: title,
                     data: this.data,
-                    borderColor: "#00ffd9",
-                    backgroundColor: "#00ffd9",
+                    borderColor: color,
+                    backgroundColor: color,
                 }
             ]
         }
@@ -620,21 +630,21 @@ export class ChartComponent implements OnInit {
         // ordersChart.update();
     }
 
-    viewChartForEconomyStacked(title1: string, title2: string, data1: any, data2: any, isPercent: boolean, debt_stock:boolean = false) {
+    viewChartForEconomyStacked(title1: string, title2: string, data1: any, data2: any, isPercent: boolean, debt_stock:boolean = false, color:string[]) {
         const myData = {
             labels: economicData.map((val) => val.x),
             datasets: [
                 {
                     label: title1,
                     data: data1,
-                    borderColor: "#00ffd9",
-                    backgroundColor: "#00ffd9",
+                    borderColor: color[0],
+                    backgroundColor: color[0],
                 },
                 {
                     label: title2,
                     data: data2,
-                    borderColor: "#081248",
-                    backgroundColor: "#081248",
+                    borderColor: color[1],
+                    backgroundColor: color[1],
                 }
             ]
         }
@@ -669,7 +679,7 @@ export class ChartComponent implements OnInit {
                 {
                     label: '2016 NGN ',
                     data: data3,
-                    borderColor: '#12263F',
+                    borderColor: '#ff4500',
                     backgroundColor: '#ffffff',
                     // yAxisID: 'y2',
                 },
@@ -690,7 +700,7 @@ export class ChartComponent implements OnInit {
                 {
                     label: '2019 NGN ',
                     data: data6,
-                    borderColor: '#f5365c',
+                    borderColor: '#a52a2a',
                     backgroundColor: '#ffffff',
                     // yAxisID: 'y5',
                 }

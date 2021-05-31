@@ -118,7 +118,7 @@ p {
     padding: 12px 20px;
     background-color: white;
     border: 1px solid navy;
-    color: navy;
+    color: #000000b5;
     font-weight: bold;
     outline: none;
     text-decoration: none;
@@ -144,7 +144,7 @@ p {
 #head .sector{
     padding: 12px 20px;
     border: 1px solid navy;
-    color: navy;
+    color: #000000b5;
     font-weight: bold;
     margin-left: 5px;
     outline: none;
@@ -155,7 +155,7 @@ p {
     #head .sector{
         padding: 12px 26px;
         border: 1px solid navy;
-        color: navy;
+        color: #000000b5;
         font-weight: bold;
         margin-left: 1px;
         margin-top: 10px;
@@ -166,7 +166,7 @@ p {
 
 #head .sector:hover{
     background-color: #00ffd9;
-    color: navy;;
+    color: #000000b5;;
 }
 
 
@@ -195,7 +195,7 @@ p {
 
 #head .Pan_afr:hover{
     background-color: #00ffd9; 
-    color: navy; 
+    color: #000000b5; 
 }
 
 
@@ -233,7 +233,7 @@ p {
 }
 
 #mini_container section h3{
-    color: navy;
+    color: #000000b5;
     font-size: 20px;
     font-weight: 500;
     line-height: 1px;
@@ -242,7 +242,7 @@ p {
 @media screen and (max-width: 480px){
     #mini_container section h3{
         margin-top: 40px;
-        color: navy;
+        color: #000000b5;
         font-size: 20px;
         font-weight: 500;
         line-height: 28px;
